@@ -1,7 +1,7 @@
 import pandas as pd
-import matplotlib as mp
+import smtplib as sm
 import time as tm
-from openpyxl.workbook import Workbook
+
 
 def gen(length):
     import random as rd
@@ -328,3 +328,24 @@ def saving():
     put_usr(usrn)
     put_pd(pds)
     put_time(time)
+
+
+def otp(email):
+    session = 0
+    while True:
+        if session == 0:
+            OTP = "234513"
+            s = sm.SMTP('smtp.gmail.com', 587)
+            s.starttls()
+            s.login("akis.pwdchecker@gmail.com", "tjjqhaifdobuluhg")
+            s.sendmail('akis.pwdchecker@gmail.com', email, OTP)
+            a = input("Enter Your OTP >>: ")
+            if a == OTP:
+                print("Verified")
+                session += 1
+                x = True
+                break
+            else:
+                print("Please Check your OTP again")
+                x = False
+    return x

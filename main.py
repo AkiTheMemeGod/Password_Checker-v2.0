@@ -1,5 +1,6 @@
 import Functions as fn
-# import pandas as pd
+# import pandas as
+email = "k.akashkumar@gmail.com"
 while True:
     choice = input("Password Generator/Checker : \n\n"
                    "Generate | Check | Manage | Exit : ? ")
@@ -42,7 +43,10 @@ while True:
         userchoice = input("Show / Edit / Delete / Clearall :")
         userchoice.lower()
         if userchoice.startswith("show"):
-            fn.show()
+            if fn.otp(email):
+                fn.show()
+            else:
+                print("couldn't identify the user")
         elif userchoice.startswith("edit"):
             fn.edit()
         elif userchoice.startswith("delete"):
@@ -64,7 +68,3 @@ while True:
     else:
         print("invalid choice try again .. ! ")
 
-
-# https://thecleverprogrammer.com/2021/04/14/otp-verification-using-python/
-
-# we have to implement the otp function to this project yet looking forward to do this int he coming week
