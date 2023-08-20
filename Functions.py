@@ -1,10 +1,11 @@
 import pandas as pd
 import smtplib as sm
 import time as tm
+import random as rd
 
 
 def gen(length):
-    import random as rd
+
     small = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
              'v',
              'w', 'x', 'y', 'z']
@@ -186,7 +187,7 @@ def show():
         "PASSWORDS": pds
     }
     df = pd.DataFrame(data)
-    print(df)
+    print("\n" + df)
     usrn = [i + "\n" for i in usrn]
     pds = [i + "\n" for i in pds]
     time = [i + "\n" for i in time]
@@ -330,22 +331,33 @@ def saving():
     put_time(time)
 
 
-def otp(email):
-    session = 0
-    while True:
-        if session == 0:
-            OTP = "234513"
-            s = sm.SMTP('smtp.gmail.com', 587)
-            s.starttls()
-            s.login("akis.pwdchecker@gmail.com", "tjjqhaifdobuluhg")
-            s.sendmail('akis.pwdchecker@gmail.com', email, OTP)
+def otp_gen():
+    otp = ""
+    for i in range(0, 6):
+        z = str(rd.randint(0, 9))
+        otp += z
+    return otp
+
+
+def verify_otp(email, session):
+    i = 0
+    while session == 0:
+        print("INITALIZING GENERAL 2-FACT AUTHENTICATION\n"
+              "A 6 digit OTP has been sent to the email k.******umar@gmail.com \n")
+        OTP = otp_gen()
+        s = sm.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        s.login("akis.pwdchecker@gmail.com", "tjjqhaifdobuluhg")
+        s.sendmail('akis.pwdchecker@gmail.com', email, OTP)
+        while i < 5:
             a = input("Enter Your OTP >>: ")
             if a == OTP:
-                print("Verified")
-                session += 1
-                x = True
+                print("Verified !\n")
                 break
             else:
-                print("Please Check your OTP again")
-                x = False
-    return x
+                i += 1
+                print(f"Wrong OTP , you have {5-i} - no of attempts left")
+                if i == 5:
+                    exit("\t\t\t\n\nTOO MANY ATTEMPTS TRY AGAIN LATER !")
+        break
+    return True

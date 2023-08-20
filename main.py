@@ -1,9 +1,20 @@
 import Functions as fn
+
 # import pandas as
-email = "k.akashkumar@gmail.com"
+email = ""
+session = 0
+admin = input("Enter Your Nickname sir : ")
+admin = admin.lower()
+if admin == "akash":
+    print("You have admin privileges ! ")
+    email = "k.akashkumar@gmail.com"
+else:
+    exit("You dont have access to this code yet : ")
+
+
 while True:
-    choice = input("Password Generator/Checker : \n\n"
-                   "Generate | Check | Manage | Exit : ? ")
+    choice = input(f"\n\n\t\t\t\tPassword Generator/Checker v2.0\n\t\t\t\t\tLogged on user : {admin}\n\n"
+                   "Generate | Check | Manage | Exit ? : ")
     choice.lower()
     if choice.startswith("generate"):
 
@@ -40,28 +51,31 @@ while True:
             else:
                 print("enter something dumbass .. ")
     elif choice.startswith("manage"):
-        userchoice = input("Show / Edit / Delete / Clearall :")
-        userchoice.lower()
-        if userchoice.startswith("show"):
-            if fn.otp(email):
-                fn.show()
-            else:
-                print("couldn't identify the user")
-        elif userchoice.startswith("edit"):
-            fn.edit()
-        elif userchoice.startswith("delete"):
-            fn.delete()
-        elif userchoice.startswith("clearall"):
-            r = input("Are you sure do you want to clear all ? y/n : ")
-            r.lower()
-            if r == 'y':
-                fn.clear()
-            elif r == 'n':
-                fn.saving()
-                exit("Bummer !")
-            else:
-                fn.saving()
-                exit("invalid choice !")
+        if fn.verify_otp(email, session):
+            while True:
+                userchoice = input("\n\nShow / Edit / Delete / Clearall / MainMenu ? : ")
+                userchoice.lower()
+                if userchoice.startswith("show"):
+                    fn.show()
+                elif userchoice.startswith("edit"):
+                    fn.edit()
+                elif userchoice.startswith("delete"):
+                    fn.delete()
+                elif userchoice.startswith("clearall"):
+                    r = input("Are you sure do you want to clear all ? y/n : ")
+                    r.lower()
+                    if r == 'y':
+                        fn.clear()
+                    elif r == 'n':
+                        fn.saving()
+                        exit("Bummer !")
+                    else:
+                        fn.saving()
+                        exit("invalid choice !")
+                elif userchoice.startswith("mainmenu"):
+                    session = 1
+                    break
+
     elif choice.startswith("exit"):
         fn.saving()
         exit("BYE BYE .. !")
