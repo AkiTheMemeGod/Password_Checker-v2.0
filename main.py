@@ -66,3 +66,5 @@ while True:
 
 
 # https://thecleverprogrammer.com/2021/04/14/otp-verification-using-python/
+
+# we have to implement the otp function to this project yet looking forward to do this int he coming week
