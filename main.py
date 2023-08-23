@@ -1,5 +1,8 @@
 import Functions as fn
 
+key = fn.gen_key()
+
+fn.decrypt(key)
 # import pandas as
 email = ""
 session = 0

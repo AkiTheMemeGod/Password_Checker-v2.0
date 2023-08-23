@@ -2,15 +2,45 @@ import pandas as pd
 import smtplib as sm
 import time as tm
 import random as rd
+from cryptography.fernet import Fernet as fn
+import os
+
+def gen_key():
+    key = fn.generate_key()
+    with open('mykey.key', 'wb') as file:
+        file.write(key)
+    return key
+
+
+def encrypt(key):
+    f = fn(key)
+
+    with open('passwords.txt', 'rb') as passes:
+        passes = passes.read()
+    enc_pass = f.encrypt(passes)
+
+    with open('enc_passwords.txt', 'wb') as enc_passes:
+        enc_passes.write(enc_pass)
+
+
+def decrypt(key):
+    f = fn(key)
+
+    with open('enc_passwords.txt', 'rb') as enc_passes:
+        passes = enc_passes.read()
+
+    dec_pass = f.decrypt(passes)
+
+    with open('passwords.txt', 'wb') as passes:
+        passes.write(dec_pass)
 
 
 def gen(length):
-
     small = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
              'v',
              'w', 'x', 'y', 'z']
     caps = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U',
-            'V','W', 'X', 'Y', 'Z']
+            'V', 'W', 'X', 'Y', 'Z']
     spec = ['!', '@', '#', '$', '%', '&', '=']
     i = 0
     pwd = ""
@@ -30,6 +60,7 @@ def gen(length):
     def spec_gen():
         s = rd.choice(spec)
         return s
+
     args = [small_gen, caps_gen, num_gen, spec_gen]
 
     while i < int(length):
@@ -158,7 +189,7 @@ def save(pwd):
         put_pd(pds)
 
         time = get_time()
-        time.append(tm.asctime()+'\n')
+        time.append(tm.asctime() + '\n')
         put_time(time)
 
     else:
@@ -172,7 +203,6 @@ def show():
     time = []
     time = get_time()
     # time.append(tm.asctime())
-
 
     usrn = get_usr()
     pds = get_pd()
@@ -194,13 +224,13 @@ def show():
     put_pd(pds)
     put_time(time)
 
+
 def delete():
     usrn = []
     pds = []
     time = []
     time = get_time()
     # time.append(tm.asctime())
-
 
     usrn = get_usr()
     pds = get_pd()
@@ -237,7 +267,6 @@ def edit():
     time = get_time()
     # time.append(tm.asctime())
 
-
     usrn = get_usr()
     pds = get_pd()
 
@@ -259,10 +288,10 @@ def edit():
                        "\nenter P to edit Password : ")
         editor.lower()
         if editor == 'u':
-            usrn[row] = input("Enter the new username : ") #+ "\n"
+            usrn[row] = input("Enter the new username : ")  # + "\n"
             break
         elif editor == 'p':
-            pds[row] = input("Enter the new password : ") #+ "\n"
+            pds[row] = input("Enter the new password : ")  # + "\n"
             break
         else:
             print("wrong selection try again .. ")
@@ -281,6 +310,7 @@ def edit():
     put_usr(usrn)
     put_pd(pds)
     put_time(time)
+
 
 def clear():
     usrn = []
@@ -355,7 +385,7 @@ def verify_otp(email, session):
                 break
             else:
                 i += 1
-                print(f"Wrong OTP , you have {5-i} - no of attempts left")
+                print(f"Wrong OTP , you have {5 - i} - no of attempts left")
                 if i == 5:
                     exit("\t\t\t\n\nTOO MANY ATTEMPTS TRY AGAIN LATER !")
         break
