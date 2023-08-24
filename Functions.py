@@ -5,10 +5,12 @@ import random as rd
 from cryptography.fernet import Fernet as fn
 import os
 
+
 def gen_key():
+    if os.i
     key = fn.generate_key()
-    with open('mykey.key', 'wb') as file:
-        file.write(key)
+    with open('.idea\mykey.key', 'wb') as keys:
+        keys.write(key)
     return key
 
 

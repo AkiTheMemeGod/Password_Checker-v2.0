@@ -1,7 +1,6 @@
 import Functions as fn
 
-key = fn.gen_key()
-
+key = fn.gen_key(session)
 fn.decrypt(key)
 # import pandas as
 email = ""
@@ -30,7 +29,7 @@ while True:
         while True:
 
             # pwd = input("Enter the password to check (len = 16 or more) : ") + "\n"
-            sec,pwd = fn.checker()
+            sec, pwd = fn.checker()
             if sec == 4:
                 print("\nStrong password !")
                 fn.save(pwd)
