@@ -5,14 +5,16 @@ import random as rd
 from cryptography.fernet import Fernet as fn
 import os
 
-
-
 def gen_key():
-    if os.i
-    key = fn.generate_key()
-    with open('.idea\mykey.key', 'wb') as keys:
-        keys.write(key)
-    return key
+    if os.path.exists('.idea\mykey.key'):
+        with open('.idea\mykey.key', 'rb') as keys:
+            key = keys.read()
+        return key
+    else:
+        key = fn.generate_key()
+        with open('.idea\mykey.key', 'wb') as keys:
+            keys.write(key)
+        return key
 
 
 def encrypt(key):
@@ -20,10 +22,19 @@ def encrypt(key):
 
     with open('passwords.txt', 'rb') as passes:
         passes = passes.read()
+
     enc_pass = f.encrypt(passes)
 
     with open('enc_passwords.txt', 'wb') as enc_passes:
         enc_passes.write(enc_pass)
+
+    with open('enc_usernames.txt', 'wb') as usernames:
+        users = usernames.read()
+
+    enc_user = f.encrypt(users)
+
+    with open('usernames.txt', 'rb') as enc_users:
+        enc_users.write(enc_user)
 
 
 def decrypt(key):
@@ -36,6 +47,14 @@ def decrypt(key):
 
     with open('passwords.txt', 'wb') as passes:
         passes.write(dec_pass)
+
+    with open('enc_usernames.txt', 'rb') as enc_users:
+        users = enc_users.read()
+
+    dec_users = f.decrypt(users)
+
+    with open('usernames.txt', 'wb') as usernames:
+        usernames.write(dec_users)
 
 
 def gen(length):

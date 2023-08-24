@@ -1,7 +1,6 @@
 import Functions as fn
 
-
-key = fn.gen_key(session)
+key = fn.gen_key()
 fn.decrypt(key)
 # import pandas as
 email = ""
@@ -13,7 +12,6 @@ if admin == "akash":
     email = "k.akashkumar@gmail.com"
 else:
     exit("You dont have access to this code yet : ")
-
 
 while True:
     choice = input(f"\n\n\t\t\t\tPassword Generator/Checker v2.0\n\t\t\t\t\tLogged on user : {admin}\n\n"
@@ -81,8 +79,10 @@ while True:
 
     elif choice.startswith("exit"):
         fn.saving()
+        fn.encrypt(key)
         exit("BYE BYE .. !")
     else:
         print("invalid choice try again .. ! ")
+
 
 # have to implement the encryption cycle
