@@ -6,6 +6,7 @@ from cryptography.fernet import Fernet as fn
 import os
 
 
+
 def gen_key():
     if os.i
     key = fn.generate_key()
