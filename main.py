@@ -71,25 +71,24 @@ try:
                         if r == 'y':
                             fn.clear()
                         elif r == 'n':
-                            fn.saving()
-                            exit("Bummer !")
+                            continue
                         else:
-                            fn.saving()
-                            exit("invalid choice !")
+                            continue
                     elif userchoice.startswith("mainmenu"):
                         session = 1
                         break
 
         elif choice.startswith("exit"):
-            fn.saving()
             exit("BYE BYE .. !")
         else:
             print("invalid choice try again .. ! ")
 
 except KeyboardInterrupt:
+    fn.saving()
     fn.encrypt(key)
     raise
 # have to implement the encryption cycle
 finally:
+    fn.saving()
     fn.encrypt(key)
     raise
