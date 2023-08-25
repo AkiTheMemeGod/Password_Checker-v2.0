@@ -9,7 +9,7 @@ try:
     x, y, z = fn.account()
     if x:
         print("You have admin privileges ! ")
-        if os.path.exists('.idea\mykey.key'):
+        if os.path.exists('pg_chk_fls/mykey.key'):
             fn.decrypt(key)
         email = str(y)
     else:

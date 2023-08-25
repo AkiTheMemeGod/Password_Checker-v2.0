@@ -8,40 +8,36 @@ import os
 
 def account():
     while True:
-        if os.path.exists(".idea/acc_us.txt"):
+        if os.path.exists("pg_chk_fls/acc_us.txt"):
             username = input("Enter your username: ")
             password = input("Enter your password: ")
 
-            if username == open(".idea/acc_us.txt").read() and password == open(".idea/acc_pd.txt").read():
+            if username == open("pg_chk_fls/acc_us.txt").read() and password == open("pg_chk_fls/acc_pd.txt").read():
                 print("Successful login")
-                emails = open(".idea/acc_email.txt").read()
+                emails = open("pg_chk_fls/acc_email.txt").read()
                 return True, emails, username
             else:
                 print('Incorrect')
                 return False
         else:
-            filename = ".idea/acc_us.txt"
-            with open(filename, "w") as f:
+            with open("pg_chk_fls/acc_us.txt", "w") as f:
                 f.write(input("Enter a username: "))
 
-            filename = ".idea/acc_pd.txt"
-            with open(filename, "w") as f:
+            with open("pg_chk_fls/acc_pd.txt", "w") as f:
                 f.write(input("Enter a password: "))
 
-            filename = ".idea/acc_email.txt"
-            with open(filename, "w") as f:
+            with open("pg_chk_fls/acc_email.txt", "w") as f:
                 f.write(input("Enter a email: "))
 
 
-
 def gen_key():
-    if os.path.exists('.idea\mykey.key'):
-        with open('.idea\mykey.key', 'rb') as keys:
+    if os.path.exists('pg_chk_fls/mykey.key'):
+        with open('pg_chk_fls/mykey.key', 'rb') as keys:
             key = keys.read()
         return key
     else:
         key = fn.generate_key()
-        with open('.idea\mykey.key', 'wb') as keys:
+        with open('pg_chk_fls/mykey.key', 'wb') as keys:
             keys.write(key)
         return key
 
@@ -49,65 +45,65 @@ def gen_key():
 def encrypt(key):
     f = fn(key)
 
-    with open('passwords.txt', 'rb') as passes:
+    with open('pg_chk_fls/passwords.txt', 'rb') as passes:
         passes = passes.read()
 
     enc_pass = f.encrypt(passes)
 
-    with open('enc_passwords.txt', 'wb') as enc_passes:
+    with open('pg_chk_fls/enc_passwords.txt', 'wb') as enc_passes:
         enc_passes.write(enc_pass)
 
-    with open('usernames.txt', 'rb') as usernames:
+    with open('pg_chk_fls/usernames.txt', 'rb') as usernames:
         users = usernames.read()
 
     enc_user = f.encrypt(users)
 
-    with open('enc_usernames.txt', 'wb') as enc_users:
+    with open('pg_chk_fls/enc_usernames.txt', 'wb') as enc_users:
         enc_users.write(enc_user)
 
-    with open('login_credentials.xlsx', 'rb') as logs:
+    with open('pg_chk_fls/login_credentials.xlsx', 'rb') as logs:
         log = logs.read()
 
     enc_log = f.encrypt(log)
 
-    with open('enc_login_credentials.xlsx', 'wb') as enc_logs:
+    with open('pg_chk_fls/enc_login_credentials.xlsx', 'wb') as enc_logs:
         enc_logs.write(enc_log)
 
-    os.remove("passwords.txt")
-    os.remove("usernames.txt")
-    os.remove("login_credentials.xlsx")
+    os.remove("pg_chk_fls/passwords.txt")
+    os.remove("pg_chk_fls/usernames.txt")
+    os.remove("pg_chk_fls/login_credentials.xlsx")
 
 
 def decrypt(key):
     f = fn(key)
 
-    with open('enc_passwords.txt', 'rb') as enc_passes:
+    with open('pg_chk_fls/enc_passwords.txt', 'rb') as enc_passes:
         passes = enc_passes.read()
 
     dec_pass = f.decrypt(passes)
 
-    with open('passwords.txt', 'wb') as passes:
+    with open('pg_chk_fls/passwords.txt', 'wb') as passes:
         passes.write(dec_pass)
 
-    with open('enc_usernames.txt', 'rb') as enc_users:
+    with open('pg_chk_fls/enc_usernames.txt', 'rb') as enc_users:
         users = enc_users.read()
 
     dec_users = f.decrypt(users)
 
-    with open('usernames.txt', 'wb') as usernames:
+    with open('pg_chk_fls/usernames.txt', 'wb') as usernames:
         usernames.write(dec_users)
 
-    with open('enc_login_credentials.xlsx', 'rb') as enc_logs:
+    with open('pg_chk_fls/enc_login_credentials.xlsx', 'rb') as enc_logs:
         log = enc_logs.read()
 
     dec_logs = f.decrypt(log)
 
-    with open('login_credentials.xlsx', 'wb') as logs:
+    with open('pg_chk_fls/login_credentials.xlsx', 'wb') as logs:
         logs.write(dec_logs)
 
-    os.remove("enc_passwords.txt")
-    os.remove("enc_usernames.txt")
-    os.remove("enc_login_credentials.xlsx")
+    os.remove("pg_chk_fls/enc_passwords.txt")
+    os.remove("pg_chk_fls/enc_usernames.txt")
+    os.remove("pg_chk_fls/enc_login_credentials.xlsx")
 
 
 def gen(length):
@@ -149,35 +145,35 @@ def gen(length):
 
 
 def get_pd():
-    with open("passwords.txt", 'r') as file:
+    with open("pg_chk_fls/passwords.txt", 'r') as file:
         passwords = file.readlines()
     return passwords
 
 
 def put_pd(pwd):
-    with open("passwords.txt", 'w') as file:
+    with open("pg_chk_fls/passwords.txt", 'w') as file:
         file.writelines(pwd)
 
 
 def get_usr():
-    with open("usernames.txt", 'r') as file:
+    with open("pg_chk_fls/usernames.txt", 'r') as file:
         usernames = file.readlines()
     return usernames
 
 
 def put_usr(usrn):
-    with open("usernames.txt", 'w') as file:
+    with open("pg_chk_fls/usernames.txt", 'w') as file:
         file.writelines(usrn)
 
 
 def get_time():
-    with open("timestamp.txt", 'r') as file:
+    with open("pg_chk_fls/timestamp.txt", 'r') as file:
         times = file.readlines()
     return times
 
 
 def put_time(tim):
-    with open("timestamp.txt", 'w') as file:
+    with open("pg_chk_fls/timestamp.txt", 'w') as file:
         file.writelines(tim)
 
 
@@ -423,7 +419,7 @@ def saving():
         "PASSWORDS": pds
     }
     df = pd.DataFrame(data)
-    df.to_excel("login_credentials.xlsx")
+    df.to_excel("pg_chk_fls/login_credentials.xlsx")
 
     usrn = [i + "\n" for i in usrn]
     pds = [i + "\n" for i in pds]
