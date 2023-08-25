@@ -9,17 +9,19 @@ import os
 def account():
     while True:
         if os.path.exists("pg_chk_fls/acc_us.txt"):
+            print("\n\n\t\t\t\t\tAn user account detected on this machine : \n\n\n ")
             username = input("Enter your username: ")
             password = input("Enter your password: ")
 
             if username == open("pg_chk_fls/acc_us.txt").read() and password == open("pg_chk_fls/acc_pd.txt").read():
-                print("Successful login")
+                print("\n\n\t\t\t\t\t\tSuccessful login")
                 emails = open("pg_chk_fls/acc_email.txt").read()
                 return True, emails, username
             else:
                 print('Incorrect')
                 return False
         else:
+            print("\t\t\t\t\tSince you are new here create an account to use our services : \n\n\n ")
             with open("pg_chk_fls/acc_us.txt", "w") as f:
                 f.write(input("Enter a username: "))
 
