@@ -241,7 +241,6 @@ def save(pwd):
 
     else:
         saving()
-        exit("NOT SAVING .... ")
 
 
 def show():
