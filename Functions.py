@@ -37,6 +37,18 @@ def encrypt(key):
     with open('enc_usernames.txt', 'wb') as enc_users:
         enc_users.write(enc_user)
 
+    with open('login_credentials.xlsx', 'rb') as logs:
+        log = logs.read()
+
+    enc_log = f.encrypt(log)
+
+    with open('enc_login_credentials.xlsx', 'wb') as enc_logs:
+        enc_logs.write(enc_log)
+
+    os.remove("passwords.txt")
+    os.remove("usernames.txt")
+    os.remove("login_credentials.xlsx")
+
 
 def decrypt(key):
     f = fn(key)
@@ -56,6 +68,18 @@ def decrypt(key):
 
     with open('usernames.txt', 'wb') as usernames:
         usernames.write(dec_users)
+
+    with open('enc_login_credentials.xlsx', 'rb') as enc_logs:
+        log = enc_logs.read()
+
+    dec_logs = f.decrypt(log)
+
+    with open('login_credentials.xlsx', 'wb') as logs:
+        logs.write(dec_logs)
+
+    os.remove("enc_passwords.txt")
+    os.remove("enc_usernames.txt")
+    os.remove("enc_login_credentials.xlsx")
 
 
 def gen(length):
@@ -394,7 +418,7 @@ def otp_gen():
 def verify_otp(email, session):
     i = 0
     while session == 0:
-        print("INITALIZING GENERAL 2-FACT AUTHENTICATION\n"
+        print("INITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
               "A 6 digit OTP has been sent to the email k.******umar@gmail.com \n")
         OTP = otp_gen()
         s = sm.SMTP('smtp.gmail.com', 587)
