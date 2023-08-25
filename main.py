@@ -6,18 +6,17 @@ key = fn.gen_key()
 try:
     email = ""
     session = 0
-    admin = input("Enter Your Nickname sir : ")
-    admin = admin.lower()
-    if admin == "akash":
+    x, y, z = fn.account()
+    if x:
         print("You have admin privileges ! ")
         if os.path.exists('.idea\mykey.key'):
             fn.decrypt(key)
-        email = "k.akashkumar@gmail.com"
+        email = str(y)
     else:
         exit("You dont have access to this code yet : ")
 
     while True:
-        choice = input(f"\n\n\t\t\t\tPassword Generator/Checker v2.0\n\t\t\t\t\tLogged on user : {admin}\n\n"
+        choice = input(f"\n\n\t\t\t\tPassword Generator/Checker v2.0\n\t\t\t\t\tLogged on user : {z}\n\n"
                        "Generate | Check | Manage | Exit ? : ")
         choice.lower()
         if choice.startswith("generate"):

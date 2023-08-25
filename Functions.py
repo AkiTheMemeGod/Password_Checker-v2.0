@@ -6,6 +6,34 @@ from cryptography.fernet import Fernet as fn
 import os
 
 
+def account():
+    while True:
+        if os.path.exists(".idea/acc_us.txt"):
+            username = input("Enter your username: ")
+            password = input("Enter your password: ")
+
+            if username == open(".idea/acc_us.txt").read() and password == open(".idea/acc_pd.txt").read():
+                print("Successful login")
+                emails = open(".idea/acc_email.txt").read()
+                return True, emails, username
+            else:
+                print('Incorrect')
+                return False
+        else:
+            filename = ".idea/acc_us.txt"
+            with open(filename, "w") as f:
+                f.write(input("Enter a username: "))
+
+            filename = ".idea/acc_pd.txt"
+            with open(filename, "w") as f:
+                f.write(input("Enter a password: "))
+
+            filename = ".idea/acc_email.txt"
+            with open(filename, "w") as f:
+                f.write(input("Enter a email: "))
+
+
+
 def gen_key():
     if os.path.exists('.idea\mykey.key'):
         with open('.idea\mykey.key', 'rb') as keys:
@@ -418,7 +446,7 @@ def verify_otp(email, session):
     i = 0
     while session == 0:
         print("INITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
-              "A 6 digit OTP has been sent to the email k.******umar@gmail.com \n")
+              f"A 6 digit OTP has been sent to the email {email} \n")
         OTP = otp_gen()
         s = sm.SMTP('smtp.gmail.com', 587)
         s.starttls()
