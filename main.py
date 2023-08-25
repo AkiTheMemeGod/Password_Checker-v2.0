@@ -8,12 +8,13 @@ try:
     session = 0
     x, y, z = fn.account()
     if x:
-        print("\t\t\t\t\tYou have admin privileges ! ")
+        fn.notif("You have admin privileges ! ")
         if os.path.exists('pg_chk_fls/mykey.key'):
             fn.decrypt(key)
         email = str(y)
     else:
-        exit("You dont have access to this code yet : ")
+        fn.notif("You dont have access to this code yet : ")
+        exit()
 
     while True:
         choice = input(f"\n\n\t\t\t\tPassword Generator/Checker v2.0\n\t\t\t\t\tLogged on user : {z}\n\n"
@@ -67,7 +68,8 @@ try:
                     elif userchoice.startswith("copy"):
                         fn.clipboard()
                     elif userchoice.startswith("clearall"):
-                        r = input("Are you sure do you want to clear all ? y/n : ")
+                        fn.notif("Are you sure do you want to clear all ? y/n : ")
+                        r = input()
                         r.lower()
                         if r == 'y':
                             fn.clear()
@@ -80,7 +82,8 @@ try:
                         break
 
         elif choice.startswith("exit"):
-            exit("BYE BYE .. !")
+            fn.notif("BYE BYE .. !")
+            exit()
         else:
             print("invalid choice try again .. ! ")
 

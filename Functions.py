@@ -5,6 +5,8 @@ import random as rd
 from cryptography.fernet import Fernet as fn
 import os
 import pyperclip as pp
+from plyer import notification
+
 
 def account():
     while True:
@@ -331,7 +333,6 @@ def delete():
     put_time(time)
 
 
-
 def clipboard():
     usrn = []
     pds = []
@@ -494,3 +495,12 @@ def verify_otp(email, session):
                     exit("\t\t\t\n\nTOO MANY ATTEMPTS TRY AGAIN LATER !")
         break
     return True
+
+
+def notif(message):
+    notification.notify(
+        title='Password Checker-v2.0',
+        message=message,
+        app_icon=None,
+        timeout=5,
+    )
