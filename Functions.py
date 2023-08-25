@@ -476,7 +476,7 @@ def otp_gen():
 def verify_otp(email, session):
     i = 0
     while session == 0:
-        print("INITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
+        notif("INITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
               f"A 6 digit OTP has been sent to the email {email} \n")
         OTP = otp_gen()
         s = sm.SMTP('smtp.gmail.com', 587)
