@@ -56,7 +56,7 @@ try:
         elif choice.startswith("manage"):
             if fn.verify_otp(email, session):
                 while True:
-                    userchoice = input("\n\nShow / Edit / Delete / Clearall / MainMenu ? : ")
+                    userchoice = input("\n\nShow / Edit / Copy / Delete / Clearall / MainMenu ? : ")
                     userchoice.lower()
                     if userchoice.startswith("show"):
                         fn.show()
@@ -64,6 +64,8 @@ try:
                         fn.edit()
                     elif userchoice.startswith("delete"):
                         fn.delete()
+                    elif userchoice.startswith("copy"):
+                        fn.clipboard()
                     elif userchoice.startswith("clearall"):
                         r = input("Are you sure do you want to clear all ? y/n : ")
                         r.lower()

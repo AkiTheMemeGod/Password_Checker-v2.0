@@ -4,7 +4,7 @@ import time as tm
 import random as rd
 from cryptography.fernet import Fernet as fn
 import os
-
+import pyperclip as pp
 
 def account():
     while True:
@@ -323,6 +323,38 @@ def delete():
     usrn.remove(usrn[delete])
     pds.remove(pds[delete])
     time.remove(time[delete])
+    usrn = [i + "\n" for i in usrn]
+    pds = [i + "\n" for i in pds]
+    time = [i + "\n" for i in time]
+    put_usr(usrn)
+    put_pd(pds)
+    put_time(time)
+
+
+
+def clipboard():
+    usrn = []
+    pds = []
+    time = []
+    time = get_time()
+    # time.append(tm.asctime())
+
+    usrn = get_usr()
+    pds = get_pd()
+
+    usrn = [i.strip('\n') for i in usrn]
+    pds = [i.strip('\n') for i in pds]
+    time = [i.strip('\n') for i in time]
+    data = {
+        "Date/Time": time,
+        "USERNAMES": usrn,
+        "PASSWORDS": pds
+    }
+    df = pd.DataFrame(data)
+    print(df)
+    select = int(input("\nMention the password you want to copy to clipboard (row.no ) : "))
+    pp.copy(pds[select])
+    print("\n\t\t\tPassword Successfully Copied into the clipboard ✅ ")
     usrn = [i + "\n" for i in usrn]
     pds = [i + "\n" for i in pds]
     time = [i + "\n" for i in time]
