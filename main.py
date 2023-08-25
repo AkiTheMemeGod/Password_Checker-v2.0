@@ -1,8 +1,11 @@
 import Functions as fn
+import os
 
 key = fn.gen_key()
-fn.decrypt(key)
-# import pandas as
+if os.path.exists('.idea\mykey.key'):
+    fn.decrypt(key)
+    os.remove("enc_passwords.txt")
+    os.remove("enc_usernames.txt")
 email = ""
 session = 0
 admin = input("Enter Your Nickname sir : ")
@@ -78,11 +81,12 @@ while True:
                     break
 
     elif choice.startswith("exit"):
-        fn.saving()
+        # fn.saving()
         fn.encrypt(key)
+        os.remove("passwords.txt")
+        os.remove("usernames.txt")
         exit("BYE BYE .. !")
     else:
         print("invalid choice try again .. ! ")
-
 
 # have to implement the encryption cycle

@@ -5,6 +5,7 @@ import random as rd
 from cryptography.fernet import Fernet as fn
 import os
 
+
 def gen_key():
     if os.path.exists('.idea\mykey.key'):
         with open('.idea\mykey.key', 'rb') as keys:
@@ -28,12 +29,12 @@ def encrypt(key):
     with open('enc_passwords.txt', 'wb') as enc_passes:
         enc_passes.write(enc_pass)
 
-    with open('enc_usernames.txt', 'wb') as usernames:
+    with open('usernames.txt', 'rb') as usernames:
         users = usernames.read()
 
     enc_user = f.encrypt(users)
 
-    with open('usernames.txt', 'rb') as enc_users:
+    with open('enc_usernames.txt', 'wb') as enc_users:
         enc_users.write(enc_user)
 
 
@@ -238,7 +239,7 @@ def show():
         "PASSWORDS": pds
     }
     df = pd.DataFrame(data)
-    print("\n" + df)
+    print(df)
     usrn = [i + "\n" for i in usrn]
     pds = [i + "\n" for i in pds]
     time = [i + "\n" for i in time]
