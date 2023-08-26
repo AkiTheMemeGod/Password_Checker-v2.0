@@ -501,6 +501,6 @@ def notif(message):
     notification.notify(
         title='Password Checker-v2.0',
         message=message,
-        app_icon=None,
+        app_icon='temporary/image.ico',
         timeout=5,
     )
