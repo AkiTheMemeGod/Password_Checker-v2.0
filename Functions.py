@@ -23,7 +23,7 @@ def account():
                 print('Incorrect')
                 return False
         else:
-            print("\t\t\t\t\tSince you are new here create an account to use our services : \n\n\n ")
+            print("\n\n\t\t\t\t\tSince you are new here create an account to use our services : \n\n\n ")
             with open("pg_chk_fls/acc_us.txt", "w") as f:
                 f.write(input("Enter a username: "))
 
@@ -389,8 +389,7 @@ def edit():
     row = int(input("\nMention the row.no you want to edit : "))
 
     while True:
-        editor = input("\nenter U to edit Username : "
-                       "\nenter P to edit Password : ")
+        editor = input("\nenter U/P to edit Username/Password : ")
         editor.lower()
         if editor == 'u':
             usrn[row] = input("Enter the new username : ")  # + "\n"
@@ -476,6 +475,8 @@ def otp_gen():
 def verify_otp(email, session):
     i = 0
     while session == 0:
+        print("\t\tINITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
+              f"A 6 digit OTP has been sent to the email {email} \n")
         notif("INITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
               f"A 6 digit OTP has been sent to the email {email} \n")
         OTP = otp_gen()
@@ -487,11 +488,13 @@ def verify_otp(email, session):
             a = input("Enter Your OTP >>: ")
             if a == OTP:
                 print("Verified !\n")
+                notif("Verified !\n")
                 break
             else:
                 i += 1
                 print(f"Wrong OTP , you have {5 - i} - no of attempts left")
                 if i == 5:
+                    notif("\t\t\t\n\nTOO MANY ATTEMPTS TRY AGAIN LATER !")
                     exit("\t\t\t\n\nTOO MANY ATTEMPTS TRY AGAIN LATER !")
         break
     return True
@@ -501,6 +504,6 @@ def notif(message):
     notification.notify(
         title='Password Checker-v2.0',
         message=message,
-        app_icon='temporary/image.ico',
-        timeout=5,
+        app_icon='pg_chk_fls/image.ico',
+        timeout=3,
     )

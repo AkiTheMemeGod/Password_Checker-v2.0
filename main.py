@@ -1,6 +1,12 @@
 import Functions as fn
 import os
 
+logo = '''
+
+░█▀▀█ █▀▀█ █▀▀ █▀▀ █───█ █▀▀█ █▀▀█ █▀▀▄    ░█▀▀█ █▀▀ █▀▀▄ █▀▀ █▀▀█ █▀▀█ ▀▀█▀▀ █▀▀█ █▀▀█  ──  ▀█─█▀ █▀█ ─ █▀▀█ 
+░█▄▄█ █▄▄█ ▀▀█ ▀▀█ █▄█▄█ █──█ █▄▄▀ █──█    ░█─▄▄ █▀▀ █──█ █▀▀ █▄▄▀ █▄▄█ ──█── █──█ █▄▄▀  ▀▀  ─█▄█─ ─▄▀ ▄ █▄▀█ 
+░█─── ▀──▀ ▀▀▀ ▀▀▀ ─▀─▀─ ▀▀▀▀ ▀─▀▀ ▀▀▀─    ░█▄▄█ ▀▀▀ ▀──▀ ▀▀▀ ▀─▀▀ ▀──▀ ──▀── ▀▀▀▀ ▀─▀▀  ──  ──▀── █▄▄ █ █▄▄█'''
+print(logo)
 key = fn.gen_key()
 
 try:
@@ -8,13 +14,14 @@ try:
     session = 0
     x, y, z = fn.account()
     if x:
-        fn.notif("You have admin privileges ! ")
+        print("\t\t\t\t\tYou have admin privileges ! ")
+        fn.notif("Successful login .. You have admin privileges ! ")
         if os.path.exists('pg_chk_fls/mykey.key'):
             fn.decrypt(key)
         email = str(y)
     else:
         fn.notif("You dont have access to this code yet : ")
-        exit()
+        exit("You dont have access to this code yet : ")
 
     while True:
         choice = input(f"\n\n\t\t\t\tPassword Generator/Checker v2.0\n\t\t\t\t\tLogged on user : {z}\n\n"
@@ -68,6 +75,7 @@ try:
                     elif userchoice.startswith("copy"):
                         fn.clipboard()
                     elif userchoice.startswith("clearall"):
+                        print("Are you sure do you want to clear all ? y/n : ")
                         fn.notif("Are you sure do you want to clear all ? y/n : ")
                         r = input()
                         r.lower()
@@ -83,7 +91,7 @@ try:
 
         elif choice.startswith("exit"):
             fn.notif("BYE BYE .. !")
-            exit()
+            exit("\n\t\t\t\tBYE BYE .. !")
         else:
             print("invalid choice try again .. ! ")
 
