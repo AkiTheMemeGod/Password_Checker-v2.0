@@ -477,8 +477,8 @@ def verify_otp(email, session):
     while session == 0:
         print("\t\tINITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
               f"A 6 digit OTP has been sent to the email {email} \n")
-        # notif("INITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
-             # f"A 6 digit OTP has been sent to the email {email} \n")
+        notif("INITIALIZING GENERAL 2-FACT AUTHENTICATION\n"
+             f"A 6 digit OTP has been sent to the email {email} \n")
         OTP = otp_gen()
         s = sm.SMTP('smtp.gmail.com', 587)
         s.starttls()
@@ -488,13 +488,13 @@ def verify_otp(email, session):
             a = input("Enter Your OTP >>: ")
             if a == OTP:
                 print("Verified !\n")
-                # notif("Verified !\n")
+                notif("Verified !\n")
                 break
             else:
                 i += 1
                 print(f"Wrong OTP , you have {5 - i} - no of attempts left")
                 if i == 5:
-                    # notif("\t\t\t\n\nTOO MANY ATTEMPTS TRY AGAIN LATER !")
+                    notif("\t\t\t\n\nTOO MANY ATTEMPTS TRY AGAIN LATER !")
                     exit("\t\t\t\n\nTOO MANY ATTEMPTS TRY AGAIN LATER !")
         break
     return True

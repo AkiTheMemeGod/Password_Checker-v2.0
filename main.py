@@ -16,12 +16,12 @@ try:
     x, y, z = fn.account()
     if x:
         print("\t\t\t\t\tYou have admin privileges ! ")
-        # fn.notif("Successful login .. You have admin privileges ! ")
+        fn.notif("Successful login .. You have admin privileges ! ")
         if os.path.exists('pg_chk_fls/mykey.key'):
             fn.decrypt(key)
         email = str(y)
     else:
-        # fn.notif("You dont have access to this code yet : ")
+        fn.notif("You dont have access to this code yet : ")
         exit("You dont have access to this code yet : ")
 
     while True:
@@ -77,7 +77,7 @@ try:
                         fn.clipboard()
                     elif userchoice.startswith("clearall"):
                         print("Are you sure do you want to clear all ? y/n : ")
-                        # fn.notif("Are you sure do you want to clear all ? y/n : ")
+                        fn.notif("Are you sure do you want to clear all ? y/n : ")
                         r = input()
                         r.lower()
                         if r == 'y':
@@ -91,7 +91,7 @@ try:
                         break
 
         elif choice.startswith("exit"):
-            # fn.notif("BYE BYE .. !")
+            fn.notif("BYE BYE .. !")
             exit("\n\t\t\t\tBYE BYE .. !")
         else:
             print("invalid choice try again .. ! ")
