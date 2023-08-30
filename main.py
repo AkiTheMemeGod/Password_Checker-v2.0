@@ -38,7 +38,7 @@ try:
         elif choice.startswith("check"):
             while True:
 
-                # pwd = input("Enter the password to check (len = 16 or more) : ") + "\n"
+                # pwd = input("Enter the password to check (len = 16 or more) : ") + "\n" yeah
                 sec, pwd = fn.checker()
                 if sec == 4:
                     print("\nStrong password !")
