@@ -19,8 +19,8 @@ try:
     if x:
         print("\t\t\t\t\tYou have admin privileges ! ")
         fn.notif("Successful login .. You have admin privileges ! ")
-        if os.path.exists('pg_chk_fls/mykey.key'):
-            fn.decrypt(key)
+        '''if os.path.exists('pg_chk_fls/mykey.key'):
+            fn.decrypt(key)'''
         email = str(y)
     else:
         fn.notif("You dont have access to this code yet : ")
@@ -103,7 +103,11 @@ except KeyboardInterrupt:
     fn.encrypt(key)
     raise
 # have to implement the encryption cycle
-finally:
+except ValueError:
     fn.saving()
     fn.encrypt(key)
     raise
+
+finally:
+    fn.saving()
+    fn.encrypt(key)
