@@ -1,4 +1,0 @@
-pandas
-cryptography
-pyperclip
-plyer
